@@ -1,7 +1,7 @@
 <?php
 namespace Unloq;
 
-use GuzzleHttp\Client;
+use Unloq\Api\ApiBase;
 
 /**
  * Class Unloq
@@ -11,26 +11,20 @@ use GuzzleHttp\Client;
  * @author Florin Popescu florin@unloq.io
  * @copyright 2017 © UNLOQ Systems LTD.
  */
-class Unloq {
-
-    /**
-     * @var string|$url Main API endpoint. Can be overwritten
-     */
-    protected $url = 'https://api.unloq.io/v1';
-    /**
-     * @var object|Client GuzzleHttp Client for Http requests
-     */
-    protected $client;
-
-    public function __construct($apiKey = null, $cmsEndpoint = false)
+class Unloq extends ApiBase {
+    public function __construct($payload = null)
     {
-        $this->client = new Client();
+        parent::__construct();
 
-        $this->apiKey = $apiKey;
+        $this->payload = $payload;
+    }
 
-        if($cmsEndpoint !== false)
-            $this->url = 'https://cms.unloq.io/v1';
+    public function isApiKeyValid()
+    {
+        $this->verb = 'GET';
+        $this->endpoint = 'organization';
 
+        return $this->execute();
     }
 
 }

@@ -1,7 +1,7 @@
 <?php
-namespace Unloq\Api;
+namespace Unloq\Api\Contracts;
 
-use Unloq\Common\UnloqModel;
+use Unloq\Api\Common\UnloqModel;
 
 /**
  * Class Authenticate
@@ -137,10 +137,14 @@ class Authenticate extends UnloqModel {
      * Default is true. When set to false, we return the information directly. Only works for UNLOQ/OTP.
      *
      * @param bool $generate_token
+     *
+     * @return $this
      */
     public function setGenerateToken($generate_token)
     {
         $this->generate_token = $generate_token;
+
+        return $this;
     }
 
     /**
@@ -156,10 +160,14 @@ class Authenticate extends UnloqModel {
      * Default is false
      *
      * @param bool $ask_trusted
+     *
+     * @return $this
      */
     public function setAskTrusted($ask_trusted)
     {
         $this->ask_trusted = $ask_trusted;
+
+        return $this;
     }
 
     /**
@@ -174,10 +182,14 @@ class Authenticate extends UnloqModel {
      * Default is null
      *
      * @param object $source_client
+     *
+     * @return $this
      */
     public function setSourceClient($source_client)
     {
         $this->source_client = $source_client;
+
+        return $this;
     }
 
     /**
@@ -192,10 +204,14 @@ class Authenticate extends UnloqModel {
      * Default is null
      *
      * @param string $public_key
+     *
+     * @return $this
      */
     public function setPublicKey($public_key)
     {
         $this->public_key = $public_key;
+
+        return $this;
     }
 
     /**

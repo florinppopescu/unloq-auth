@@ -1,12 +1,12 @@
 <?php
-namespace Unloq\Api;
+namespace Unloq\Api\Contracts;
 
-use Unloq\Common\UnloqModel;
+use Unloq\Api\Common\UnloqModel;
 
 /**
- * Class Authenticate
+ * Class Authorise
  *
- * @package Unloq\Api
+ * @package Unloq\Api\Contracts
  *
  * @property string code                                - Required
  *
@@ -31,6 +31,8 @@ class Authenticate extends UnloqModel {
     public function setCode($code)
     {
         $this->code = $code;
+
+        return $this;
     }
 
     /**
@@ -47,6 +49,8 @@ class Authenticate extends UnloqModel {
     public function setUnloqId($unloq_id)
     {
         $this->unloq_id = $unloq_id;
+
+        return $this;
     }
 
     /**
@@ -63,6 +67,8 @@ class Authenticate extends UnloqModel {
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
     }
 
     /**
@@ -79,6 +85,8 @@ class Authenticate extends UnloqModel {
     public function setReference($reference)
     {
         $this->reference = $reference;
+
+        return $this;
     }
 
     /**
@@ -95,6 +103,8 @@ class Authenticate extends UnloqModel {
     public function setIp($ip)
     {
         $this->ip = $ip;
+
+        return $this;
     }
 
     /**
@@ -111,6 +121,8 @@ class Authenticate extends UnloqModel {
     public function setGenerateToken($generate_token)
     {
         $this->generate_token = $generate_token;
+
+        return $this;
     }
 
 }
