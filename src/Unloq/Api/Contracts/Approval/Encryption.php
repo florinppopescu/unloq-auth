@@ -1,5 +1,5 @@
 <?php
-namespace Unloq\Api\Contracts;
+namespace Unloq\Api\Contracts\Approval;
 
 use Unloq\Api\Common\UnloqModel;
 
@@ -17,6 +17,10 @@ use Unloq\Api\Common\UnloqModel;
  * @property string ip                                  - Optional
  */
 class Encryption extends UnloqModel {
+    protected $authorised = true;
+
+    public $unloq_id, $email, $message, $requester_id, $public_key, $generate_token, $ip;
+
     /**
      * @return string
      */
@@ -26,13 +30,13 @@ class Encryption extends UnloqModel {
     }
 
     /**
-     * @param string $unloq_id
+     * @param string $unloqId
      *
      * @return $this
      */
-    public function setUnloqId($unloq_id)
+    public function setUnloqId($unloqId)
     {
-        $this->unloq_id = $unloq_id;
+        $this->unloq_id = $unloqId;
 
         return $this;
     }
@@ -86,13 +90,13 @@ class Encryption extends UnloqModel {
     }
 
     /**
-     * @param bool $requester_id
+     * @param bool $requesterId
      *
      * @return $this
      */
-    public function setRequesterId($requester_id)
+    public function setRequesterId($requesterId)
     {
-        $this->requester_id = $requester_id;
+        $this->requester_id = $requesterId;
 
         return $this;
     }
@@ -106,13 +110,13 @@ class Encryption extends UnloqModel {
     }
 
     /**
-     * @param bool $public_key
+     * @param bool $publicKey
      *
      * @return $this
      */
-    public function setPublicKey($public_key)
+    public function setPublicKey($publicKey)
     {
-        $this->public_key = $public_key;
+        $this->public_key = $publicKey;
 
         return $this;
     }
@@ -126,13 +130,13 @@ class Encryption extends UnloqModel {
     }
 
     /**
-     * @param bool $generate_token
+     * @param bool $generateToken
      *
      * @return $this
      */
-    public function setGenerateToken($generate_token)
+    public function setGenerateToken($generateToken)
     {
-        $this->generate_token = $generate_token;
+        $this->generate_token = $generateToken;
 
         return $this;
     }

@@ -1,5 +1,5 @@
 <?php
-namespace Unloq\Api\Contracts;
+namespace Unloq\Api\Contracts\Approval;
 
 use Unloq\Api\Common\UnloqModel;
 
@@ -19,6 +19,10 @@ use Unloq\Api\Common\UnloqModel;
  * @property string public_key                          - Optional
  */
 class Authenticate extends UnloqModel {
+    protected $authorised = true;
+
+    public $email, $unloq_id, $method, $ip, $generate_token,
+           $token, $ask_trusted, $source_client, $public_key;
     /**
      * The UNLOQ User e-mail that initiated the authentication process
      *
@@ -136,13 +140,13 @@ class Authenticate extends UnloqModel {
     /**
      * Default is true. When set to false, we return the information directly. Only works for UNLOQ/OTP.
      *
-     * @param bool $generate_token
+     * @param bool $generateToken
      *
      * @return $this
      */
-    public function setGenerateToken($generate_token)
+    public function setGenerateToken($generateToken)
     {
-        $this->generate_token = $generate_token;
+        $this->generate_token = $generateToken;
 
         return $this;
     }
@@ -159,13 +163,13 @@ class Authenticate extends UnloqModel {
     /**
      * Default is false
      *
-     * @param bool $ask_trusted
+     * @param bool $askTrusted
      *
      * @return $this
      */
-    public function setAskTrusted($ask_trusted)
+    public function setAskTrusted($askTrusted)
     {
-        $this->ask_trusted = $ask_trusted;
+        $this->ask_trusted = $askTrusted;
 
         return $this;
     }
@@ -181,13 +185,13 @@ class Authenticate extends UnloqModel {
     /**
      * Default is null
      *
-     * @param object $source_client
+     * @param object $sourceClient
      *
      * @return $this
      */
-    public function setSourceClient($source_client)
+    public function setSourceClient($sourceClient)
     {
-        $this->source_client = $source_client;
+        $this->source_client = $sourceClient;
 
         return $this;
     }
@@ -203,13 +207,13 @@ class Authenticate extends UnloqModel {
     /**
      * Default is null
      *
-     * @param string $public_key
+     * @param string $publicKey
      *
      * @return $this
      */
-    public function setPublicKey($public_key)
+    public function setPublicKey($publicKey)
     {
-        $this->public_key = $public_key;
+        $this->public_key = $publicKey;
 
         return $this;
     }

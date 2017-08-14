@@ -1,5 +1,5 @@
 <?php
-namespace Unloq\Api\Contracts;
+namespace Unloq\Api\Contracts\Approval;
 
 use Unloq\Api\Common\UnloqModel;
 
@@ -16,7 +16,10 @@ use Unloq\Api\Common\UnloqModel;
  * @property string ip                                  - Optional
  * @property boolean generate_token                     - Optional
  */
-class Authenticate extends UnloqModel {
+class Authorize extends UnloqModel {
+    protected $authorised = true;
+
+    public $code, $unloq_id, $email, $reference, $ip, $generate_token;
     /**
      * @return string
      */
@@ -44,11 +47,13 @@ class Authenticate extends UnloqModel {
     }
 
     /**
-     * @param string $unloq_id
+     * @param string $unloqId
+     *
+     * @return $this
      */
-    public function setUnloqId($unloq_id)
+    public function setUnloqId($unloqId)
     {
-        $this->unloq_id = $unloq_id;
+        $this->unloq_id = $unloqId;
 
         return $this;
     }
@@ -63,6 +68,8 @@ class Authenticate extends UnloqModel {
 
     /**
      * @param string $email
+     *
+     * @return $this
      */
     public function setEmail($email)
     {
@@ -81,6 +88,8 @@ class Authenticate extends UnloqModel {
 
     /**
      * @param int $reference
+     *
+     * @return $this
      */
     public function setReference($reference)
     {
@@ -99,6 +108,8 @@ class Authenticate extends UnloqModel {
 
     /**
      * @param string $ip
+     *
+     * @return $this
      */
     public function setIp($ip)
     {
@@ -116,11 +127,13 @@ class Authenticate extends UnloqModel {
     }
 
     /**
-     * @param bool $generate_token
+     * @param bool $generateToken
+     *
+     * @return $this
      */
-    public function setGenerateToken($generate_token)
+    public function setGenerateToken($generateToken)
     {
-        $this->generate_token = $generate_token;
+        $this->generate_token = $generateToken;
 
         return $this;
     }

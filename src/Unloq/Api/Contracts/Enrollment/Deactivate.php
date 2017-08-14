@@ -1,5 +1,5 @@
 <?php
-namespace Unloq\Api\Contracts;
+namespace Unloq\Api\Contracts\Enrollment;
 
 use Unloq\Api\Common\UnloqModel;
 
@@ -11,7 +11,7 @@ use Unloq\Api\Common\UnloqModel;
  * @property string email                               - Required
  * @property string name                                - Optional
  */
-class Encryption extends UnloqModel {
+class Deactivate extends UnloqModel {
     /**
      * @return string
      */
