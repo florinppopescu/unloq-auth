@@ -19,10 +19,6 @@ class ApiBase
 
     public function execute()
     {
-        if(is_object($this->payload) && method_exists($this->payload, 'toJson'))
-            $this->payload = $this->payload->toJson();
-
-
         try {
             $res = $this->client->request($this->verb, $this->endpoint, $this->payload);
 
@@ -41,6 +37,18 @@ class ApiBase
             return false;
         } catch (\GuzzleHttp\Exception\ServerException $e){
             return false;
+        }
+    }
+
+    public function setPayload($payload)
+    {
+        if(is_object($payload)) {
+            $this->payload = [
+                'json' => $payload->toJson(),
+            ];
+
+            if ($payload->authorised)
+                $this->payload['headers'] = ['Authorization' => 'Bearer ' . UNLOQ_API_KEY];
         }
     }
 }

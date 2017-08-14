@@ -2,6 +2,7 @@
 namespace Unloq;
 
 use Unloq\Api\ApiBase;
+use Unloq\Api\Contracts;
 
 /**
  * Class Unloq
@@ -25,6 +26,35 @@ class Unloq extends ApiBase {
         $this->endpoint = 'organization';
 
         return $this->execute();
+    }
+
+    public function authenticate(Contracts\Approval\Authenticate $payload)
+    {
+        $this->setPayload($payload);
+        $this->endpoint = 'authenticate';
+        $this->verb = 'post';
+
+        $this->execute();
+    }
+
+    public function authorize(Contracts\Approval\Authorize $payload)
+    {
+
+        $this->payload = $payload;
+        $this->endpoint = 'authorize';
+        $this->verb = 'post';
+    }
+
+    public function encrypt(Contracts\Approval\Encryption $payload)
+    {
+        $this->payload = $payload;
+        $this->endpoint = 'encrypt';
+        $this->verb = 'post';
+    }
+
+    public function getApprovals($id = null)
+    {
+
     }
 
 }
