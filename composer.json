@@ -20,7 +20,7 @@
     },
 	"autoload": {
         "psr-4": {
-            "Unloq\\": "src/"
+            "Unloq\\": "src/Unloq"
         }
     },
 	"autoload-dev": {

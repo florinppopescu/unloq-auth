@@ -1,7 +1,7 @@
 <?php
 namespace Unloq\Api\Contracts\Enrollment;
 
-use Unloq\Api\Common\UnloqModel;
+use Unloq\Common\UnloqModel;
 
 /**
  * Class Enroll
@@ -12,6 +12,11 @@ use Unloq\Api\Common\UnloqModel;
  * @property string name                                - Optional
  */
 class Enroll extends UnloqModel {
+    /**
+     * @var bool
+     */
+    public $authorised = true;
+
     /**
      * @return string
      */
