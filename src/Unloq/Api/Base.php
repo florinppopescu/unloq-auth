@@ -21,29 +21,56 @@ class Base
         $this->endpoint = Environment::ENDPOINT_PROD;
     }
 
+    /**
+     * Executes an http request to UNLOQ REST API
+     *
+     * @param $verb
+     * @param $action
+     * @param null $payload
+     *
+     * @return array
+     */
     public function execute($verb, $action, $payload = null)
     {
+        $errorCode = null;
+        $errorMessage = null;
+
         try {
-            $res = $this->client->request($verb, $this->endpoint . $action, $this->setData($payload));
+            $response = $this->client->request($verb, $this->endpoint . $action, $this->setData($payload));
 
-            if($res->getStatusCode() === 200){
-                return [
-                    'status' => 200,
-                    'response' => json_decode($res->getBody()->getContents())->result,
-                ];
+            if($response->getStatusCode() === 200){
+                $code = $response->getStatusCode();
+                $message = json_decode($response->getBody()->getContents());
             }
-
         } catch (\GuzzleHttp\Exception\ClientException $e){
-            return [
-                'status' => $e->getCode(),
-                'response' => $e->getMessage()
-            ];
+            $code = $e->getCode();
+            $message = json_decode($e->getResponse()->getBody()->getContents());
+
+            if(isset($message->error) && isset($message->error->code)) {
+                $errorCode = $message->error->code;
+                $errorMessage = $message->error->message;
+            } else {
+                $errorCode = 'SERVER.ERROR';
+                $errorMessage = 'An unexpected error occurred';
+            }
         } catch (\GuzzleHttp\Exception\ServerException $e){
-            return [
-                'status' => $e->getCode(),
-                'response' => $e->getMessage()
-            ];
+            $code = $e->getCode();
+            $message = json_decode($e->getResponse()->getBody()->getContents());
+            $errorCode = 'SERVER.ERROR';
+            $errorMessage = 'An unexpected error occurred';
         }
+
+        $return = [
+            'httpCode' => $code,
+            'responseMessage' => $message,
+        ];
+
+        if(isset($errorCode))
+            $return['errorCode'] = $errorCode;
+        if(isset($errorMessage))
+            $return['errorMessage'] = $errorMessage;
+
+        return $return;
     }
 
     public function setData($payload)
