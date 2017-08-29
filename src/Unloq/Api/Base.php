@@ -28,7 +28,7 @@ class Base
      * @param $action
      * @param null $payload
      *
-     * @return array
+     * @return object
      */
     public function execute($verb, $action, $payload = null)
     {
@@ -70,7 +70,7 @@ class Base
         if(isset($errorMessage))
             $return['errorMessage'] = $errorMessage;
 
-        return $return;
+        return (object)$return;
     }
 
     public function setData($payload)

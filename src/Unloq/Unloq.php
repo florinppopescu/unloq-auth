@@ -2,7 +2,7 @@
 namespace Unloq;
 
 use Unloq\Api\Base;
-use Unloq\Api\Contracts;
+use Unloq\Api\Contracts as UnloqContracts;
 
 /**
  * Class Unloq
@@ -42,17 +42,32 @@ class Unloq extends Base {
     }
 
     /************************ ENROLLMENT *************************/
-    public function isEnrolled($payload)
+    /**
+     * @param Api\Contracts\Enrollment\Enroll $payload
+     *
+     * @return object
+     */
+    public function isEnrolled(UnloqContracts\Enrollment\Enroll $payload)
     {
         return $this->execute('GET', 'enrolled?email=' . $payload->getEmail(), $payload);
     }
 
-    public function enroll($payload)
+    /**
+     * @param Api\Contracts\Enrollment\Enroll $payload
+     *
+     * @return object
+     */
+    public function enroll(UnloqContracts\Enrollment\Enroll $payload)
     {
         return $this->execute('POST', 'enroll', $payload);
     }
 
-    public function deactivate($payload)
+    /**
+     * @param Api\Contracts\Enrollment\Enroll $payload
+     *
+     * @return object
+     */
+    public function deactivate(UnloqContracts\Enrollment\Enroll $payload)
     {
         return $this->execute('POST', 'deactivate', $payload);
     }

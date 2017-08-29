@@ -5,8 +5,8 @@
 			convertWarningsToExceptions="true"
 			stopOnFailure="true">
 			<testsuites>
-				<testsuite name="Unit Tests">
-					<directory>tests</directory>
+				<testsuite name="UNLOQ Unit Tests">
+					<directory sufix='.php'>tests/Unloq</directory>
 				</testsuite>
 			</testsuites>
 </phpunit>
