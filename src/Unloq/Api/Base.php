@@ -81,13 +81,12 @@ class Base
             $data = [
                 'json' => (array) $payload,
             ];
-
-            $data['headers'] = ['Content-Type' => 'application/json'];
-
-            // TODO : implement exception for when authorised is true and api key is not set
-            if ($payload->authorised && isset($this->apiKey))
-                $data['headers'] = ['Authorization' => 'Bearer ' . $this->apiKey];
         }
+
+        $data['headers'] = ['Content-Type' => 'application/json'];
+
+        if (isset($this->apiKey))
+            $data['headers'] = ['Authorization' => 'Bearer ' . $this->apiKey];
 
         return $data;
     }

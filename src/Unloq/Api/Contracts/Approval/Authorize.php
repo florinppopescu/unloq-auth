@@ -17,7 +17,10 @@ use Unloq\Api\Common\UnloqModel;
  * @property boolean generate_token                     - Optional
  */
 class Authorize extends UnloqModel {
-    protected $authorised = true;
+    /**
+     * @var bool
+     */
+    public $authorised = true;
 
     public $code, $unloq_id, $email, $reference, $ip, $generate_token;
     /**

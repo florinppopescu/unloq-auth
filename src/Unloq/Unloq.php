@@ -23,7 +23,8 @@ class Unloq extends Base {
     {
         parent::__construct();
 
-        $this->apiKey = $apiKey;
+        if(isset($apiKey))
+            $this->apiKey = $apiKey;
     }
 
     /************************ APPROVALS *************************/
@@ -51,8 +52,8 @@ class Unloq extends Base {
     public function getApprovals($id = null)
     {
         $action = isset($id) ? 'approvals/' . $id : 'approvals';
-        
-        return $this->execute('POST', $action);
+
+        return $this->execute('GET', $action);
     }
 
     /************************ ENROLLMENT *************************/

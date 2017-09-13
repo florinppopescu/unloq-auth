@@ -1,7 +1,7 @@
 <?php
 namespace Unloq\Api\Contracts\Enrollment;
 
-use Unloq\Common\UnloqModel;
+use Unloq\Api\Common\UnloqModel;
 
 /**
  * Class Enroll

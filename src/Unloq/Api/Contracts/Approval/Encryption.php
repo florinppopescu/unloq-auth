@@ -17,7 +17,10 @@ use Unloq\Api\Common\UnloqModel;
  * @property string ip                                  - Optional
  */
 class Encryption extends UnloqModel {
-    protected $authorised = true;
+    /**
+     * @var bool
+     */
+    public $authorised = true;
 
     public $unloq_id, $email, $message, $requester_id, $public_key, $generate_token, $ip;
 

@@ -19,9 +19,12 @@ use Unloq\Api\Common\UnloqModel;
  * @property string public_key                          - Optional
  */
 class Authenticate extends UnloqModel {
-    protected $authorised = true;
+    /**
+     * @var bool
+     */
+    public $authorised = true;
 
-    public $email, $unloq_id, $method, $ip, $generate_token,
+    protected $email, $unloq_id, $method, $ip, $generate_token,
            $token, $ask_trusted, $source_client, $public_key;
     /**
      * The UNLOQ User e-mail that initiated the authentication process
