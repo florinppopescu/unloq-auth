@@ -30,6 +30,8 @@ class Authorize extends UnloqModel {
 
     /**
      * @param string $code
+     *
+     * @return $this
      */
     public function setCode($code)
     {

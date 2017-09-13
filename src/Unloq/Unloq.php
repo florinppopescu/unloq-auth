@@ -13,6 +13,12 @@ use Unloq\Api\Contracts as UnloqContracts;
  * @copyright 2017 © UNLOQ Systems LTD.
  */
 class Unloq extends Base {
+
+    /**
+     * Unloq constructor.
+     *
+     * @param null $apiKey
+     */
     public function __construct($apiKey = null)
     {
         parent::__construct();
@@ -20,28 +26,37 @@ class Unloq extends Base {
         $this->apiKey = $apiKey;
     }
 
-    public function isApiKeyValid()
-    {
-    }
     /************************ APPROVALS *************************/
-    public function authenticate($payload)
+
+    /**
+     * @param Api\Contracts\Approval\Authenticate $payload
+     *
+     * @return object
+     */
+    public function authenticate(UnloqContracts\Approval\Authenticate $payload)
     {
+        return $this->execute('POST', 'authenticate', $payload);
     }
 
-    public function authorize($payload)
+    public function authorize(UnloqContracts\Approval\Authorize $payload)
     {
+        return $this->execute('POST', 'authorize/' . $payload->getCode(), $payload);
     }
 
-    public function encrypt($payload)
+    public function encrypt(UnloqContracts\Approval\Encryption $payload)
     {
+        return $this->execute('POST', 'encryption/user', $payload);
     }
 
     public function getApprovals($id = null)
     {
-
+        $action = isset($id) ? 'approvals/' . $id : 'approvals';
+        
+        return $this->execute('POST', $action);
     }
 
     /************************ ENROLLMENT *************************/
+
     /**
      * @param Api\Contracts\Enrollment\Enroll $payload
      *
