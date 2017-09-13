@@ -1,9 +1,9 @@
 <?php 
-namespace Unloq\Tests;
+namespace Tests\Unloq;
 use PHPUnit\Framework\TestCase;
 use Unloq\Api\Contracts\Enrollment\Enroll;
 use Unloq\Unloq;
-use Unloq\Tests\EnvironmentTest;
+use Tests\Unloq\EnvironmentTest;
 /**
 *  UnloqEnrollmentTest class
 *

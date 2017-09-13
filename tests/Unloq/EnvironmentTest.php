@@ -1,5 +1,5 @@
 <?php
-namespace Unloq\Tests;
+namespace Tests\Unloq;
 /**
  * Class Authorise
  *

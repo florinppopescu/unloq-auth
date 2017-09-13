@@ -1,6 +1,6 @@
 <?php
 
-namespace Unloq\Api\Common;
+namespace Unloq\Common;
 
 class UnloqModel
 {
