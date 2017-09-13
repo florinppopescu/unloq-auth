@@ -25,7 +25,6 @@ class UnloqEnrollmentTest extends TestCase {
      * A bogus email is checked if is enrolled. The expected result contains:
      * - HTTP status code 200
      * - the result->enrolled field value to be false
-     *
      */
     public function testBogusUserIsEnrolled(){
         $enrolled = new Enroll();
@@ -38,12 +37,11 @@ class UnloqEnrollmentTest extends TestCase {
     }
 
     /**
-     * A bogus email is checked if is enrolled. The expected result should contain:
+     * A real email is checked if is enrolled. The expected result should contain:
      * - HTTP status code 200
      * - the result->exists field value to be false (the email is not enrolled yet)
      * - the result->qr_url field should be bigger than 0 (a QR image is provided
-     * for device syncronization)
-     *
+     * for device synchronization)
      */
     public function testEnroll(){
         $enrolled = new Enroll();
@@ -68,6 +66,8 @@ class UnloqEnrollmentTest extends TestCase {
      *
      * Taking that into consideration we we'll repeat the enrollment
      * with a developer email account which has a real UNLOQ account.
+     * This account is supposed to be already enrolled into the UNLOQ
+     * application for which
      *
      * @return string
      */
@@ -82,7 +82,7 @@ class UnloqEnrollmentTest extends TestCase {
         $testEnroll = $this->unloq->isEnrolled($enrolled);
 
         $this->assertEquals(200, $testEnroll->httpCode);
-        $this->assertTrue($testEnroll->responseMessage->result->enrolled);
+        $this->assertFalse($testEnroll->responseMessage->result->enrolled);
 
         return $enrolled->getEmail();
     }
