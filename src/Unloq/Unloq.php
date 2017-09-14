@@ -119,4 +119,33 @@ class Unloq extends Base {
     {
         return $this->execute('POST', 'token/device', $payload);
     }
+
+    /************************ ACTIONS *************************/
+
+    public function createAction(UnloqContracts\Actions\Action $payload)
+    {
+        return $this->execute('POST', 'actions', $payload);
+    }
+
+    public function updateAction(UnloqContracts\Actions\Action $payload)
+    {
+        return $this->execute('PUT', 'actions/' . $payload->getCode(), $payload);
+    }
+
+    /**
+     * @param null $id
+     *
+     * @return object
+     */
+    public function getActions($id = null)
+    {
+        $action = isset($id) ? 'actions/' . $id : 'actions';
+
+        return $this->execute('GET', $action);
+    }
+
+    public function deleteAction($id)
+    {
+        return $this->execute('DELETE', 'actions/' . $id);
+    }
 }
