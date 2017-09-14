@@ -122,11 +122,21 @@ class Unloq extends Base {
 
     /************************ ACTIONS *************************/
 
+    /**
+     * @param Api\Contracts\Actions\Action $payload
+     *
+     * @return object
+     */
     public function createAction(UnloqContracts\Actions\Action $payload)
     {
         return $this->execute('POST', 'actions', $payload);
     }
 
+    /**
+     * @param Api\Contracts\Actions\Action $payload
+     *
+     * @return object
+     */
     public function updateAction(UnloqContracts\Actions\Action $payload)
     {
         return $this->execute('PUT', 'actions/' . $payload->getCode(), $payload);
@@ -144,6 +154,11 @@ class Unloq extends Base {
         return $this->execute('GET', $action);
     }
 
+    /**
+     * @param $id
+     *
+     * @return object
+     */
     public function deleteAction($id)
     {
         return $this->execute('DELETE', 'actions/' . $id);
