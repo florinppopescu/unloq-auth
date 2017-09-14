@@ -13,11 +13,6 @@ use Unloq\Api\Common\UnloqModel;
  */
 class Enroll extends UnloqModel {
     /**
-     * @var bool
-     */
-    public $authorised = true;
-
-    /**
      * @return string
      */
     public function getEmail()

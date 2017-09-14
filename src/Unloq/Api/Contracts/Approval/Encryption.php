@@ -18,13 +18,6 @@ use Unloq\Api\Common\UnloqModel;
  */
 class Encryption extends UnloqModel {
     /**
-     * @var bool
-     */
-    public $authorised = true;
-
-    public $unloq_id, $email, $message, $requester_id, $public_key, $generate_token, $ip;
-
-    /**
      * @return string
      */
     public function getUnloqId()

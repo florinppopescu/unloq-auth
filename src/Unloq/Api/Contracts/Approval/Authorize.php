@@ -18,12 +18,6 @@ use Unloq\Api\Common\UnloqModel;
  */
 class Authorize extends UnloqModel {
     /**
-     * @var bool
-     */
-    public $authorised = true;
-
-    public $code, $unloq_id, $email, $reference, $ip, $generate_token;
-    /**
      * @return string
      */
     public function getCode()
