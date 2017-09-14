@@ -1,5 +1,5 @@
 <?php
-namespace Unloq\Api\Contracts\Keys;
+namespace Unloq\Api\Contracts\ApiKeys;
 
 use Unloq\Api\Common\UnloqModel;
 
@@ -10,7 +10,7 @@ use Unloq\Api\Common\UnloqModel;
  *
  * @property array scopes                           - Required
  */
-class Key extends UnloqModel
+class ApiKey extends UnloqModel
 {
     /**
      * @return array
