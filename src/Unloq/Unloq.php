@@ -88,4 +88,35 @@ class Unloq extends Base {
         return $this->execute('POST', 'deactivate', $payload);
     }
 
+    /************************ TOKENS *************************/
+
+    /**
+     * @param Api\Contracts\Tokens\Token $payload
+     *
+     * @return object
+     */
+    public function token(UnloqContracts\Tokens\Token $payload)
+    {
+        return $this->execute('POST', 'token', $payload);
+    }
+
+    /**
+     * @param Api\Contracts\Tokens\Session $payload
+     *
+     * @return object
+     */
+    public function tokenSession(UnloqContracts\Tokens\Session $payload)
+    {
+        return $this->execute('POST', 'token/session', $payload);
+    }
+
+    /**
+     * @param Api\Contracts\Tokens\Device $payload
+     *
+     * @return object
+     */
+    public function tokenDevice(UnloqContracts\Tokens\Device $payload)
+    {
+        return $this->execute('POST', 'token/device', $payload);
+    }
 }
