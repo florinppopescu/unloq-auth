@@ -75,7 +75,7 @@ class Storage extends UnloqModel {
     }
 
     /**
-     * @return obje
+     * @return object
      */
     public function getAuth()
     {
@@ -83,7 +83,7 @@ class Storage extends UnloqModel {
     }
 
     /**
-     * @param obje $auth
+     * @param object $auth
      *
      * @return $this
      */

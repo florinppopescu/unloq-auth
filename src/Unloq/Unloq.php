@@ -287,4 +287,34 @@ class Unloq extends Base {
     {
         return $this->execute('DELETE', 'custom/emails/templates/' . $id);
     }
+
+    /**************************** STORAGE *****************************/
+
+    /**
+     * @return object
+     */
+    public function getStorageSettings()
+    {
+        return $this->execute('GET', 'custom/storage');
+    }
+
+    /**
+     * @param UnloqContracts\Storage\Storage $payload
+     *
+     * @return object
+     */
+    public function updateStorageSettings(UnloqContracts\Storage\Storage $payload)
+    {
+        return $this->execute('POST', 'custom/storage', $payload);
+    }
+
+    public function verifyStorageSettings()
+    {
+        return $this->execute('POST', 'custom/verify');
+    }
+
+    public function deleteStorageSettings()
+    {
+        return $this->execute('DELETE', 'custom/storage');
+    }
 }
