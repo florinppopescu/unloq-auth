@@ -163,4 +163,58 @@ class Unloq extends Base {
     {
         return $this->execute('DELETE', 'actions/' . $id);
     }
+
+    /************************ APIKEYS *************************/
+
+    /**
+     * @param UnloqContracts\ApiKeys\ApiKey $payload
+     *
+     * @return object
+     */
+    public function createApiKey(UnloqContracts\ApiKeys\ApiKey $payload)
+    {
+        return $this->execute('POST', 'api-keys', $payload);
+    }
+
+    /**
+     * @param null $id
+     *
+     * @return object
+     */
+    public function getApiKeys($id = null)
+    {
+        $action = isset($id) ? 'api-keys/' . $id : 'api-keys';
+
+        return $this->execute('GET', $action);
+    }
+
+    /**
+     * @param null $id
+     *
+     * @return object
+     */
+    public function getApiKey($id)
+    {
+        return $this->execute('GET', 'api-keys/' . $id);
+    }
+
+    /**
+     * @param null $id
+     *
+     * @return object
+     */
+    public function getApiKeyLogs($id)
+    {
+        return $this->execute('GET', 'api-keys/' . $id . '/logs');
+    }
+
+    /**
+     * @param $id
+     *
+     * @return object
+     */
+    public function deleteApiKeys($id)
+    {
+        return $this->execute('DELETE', 'api-keys/' . $id);
+    }
 }
