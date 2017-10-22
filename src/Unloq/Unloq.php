@@ -313,8 +313,94 @@ class Unloq extends Base {
         return $this->execute('POST', 'custom/verify');
     }
 
+    /**
+     * @return object
+     */
     public function deleteStorageSettings()
     {
         return $this->execute('DELETE', 'custom/storage');
+    }
+
+    /**************************** FIREWALL *****************************/
+
+    /**
+     * @param null $page
+     * @param null $limit
+     *
+     * @return object
+     */
+    public function getFirewallRules($page = null, $limit = null)
+    {
+        $action = 'firewalls';
+        if($page !== null)
+            $action = $action . '?page=' . $page;
+
+        if($limit !== null)
+            $action = $limit . '?limit=' . $limit;
+
+        return $this->execute('GET', $action);
+    }
+
+    /**
+     * @param $payload UnloqContracts\Firewalls\Firewall
+     *
+     * @return object
+     */
+    public function createFirewallRule($payload)
+    {
+        return $this->execute('POST', 'firewalls', $payload);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return object
+     */
+    public function getFirewallRule($id)
+    {
+        return $this->execute('GET', 'firewalls/' . $id);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return object
+     */
+    public function deleteFirewallRule($id)
+    {
+        return $this->execute('DELETE', 'firewalls/' . $id);
+    }
+
+    /**
+     * @param $ruleId
+     * @param $payload UnloqContracts\Firewalls\Target
+     *
+     * @return object
+     */
+    public function createFirewallRuleTarget($ruleId, $payload)
+    {
+        return $this->execute('POST', 'firewalls/' . $ruleId, $payload);
+    }
+
+    /**
+     * @param $ruleId
+     * @param $targetId
+     *
+     * @return object
+     */
+    public function deleteFirewallRuleTarget($ruleId, $targetId)
+    {
+        return $this->execute('DELETE', 'firewalls/' . $ruleId . '/target/' . $targetId);
+    }
+
+    /**
+     * @param $ruleId
+     * @param $payload UnloqContracts\Firewalls\Log;
+     *
+     * @return object
+     */
+    public function getFirewallRuleLogs($ruleId, $payload)
+    {
+        return $this->execute('GET', 'firewalls/' . $ruleId, $payload);
     }
 }
