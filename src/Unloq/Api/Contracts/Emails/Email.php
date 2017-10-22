@@ -13,7 +13,8 @@ use Unloq\Api\Common\UnloqModel;
  * @property string email_admin                         - Required
  * @property string email_reply                         - Optional
  * @property string from_name                           - Optional
- * @property object auth                                - Optional
+ * @property array auth                                 - Optional
+ * @property string domain                              - Optional
  */
 class Email extends UnloqModel
 {
@@ -126,13 +127,33 @@ class Email extends UnloqModel
     }
 
     /**
-     * @param object $auth
+     * @param array $auth
      *
      * @return $this
      */
     public function setAuth($auth)
     {
-        $this->auth = $auth;
+        $this->auth = json_encode($auth);
+
+        return $this;
+    }
+
+    /**
+     * @return object
+     */
+    public function getDomain()
+    {
+        return $this->domain;
+    }
+
+    /**
+     * @param array $auth
+     *
+     * @return $this
+     */
+    public function setDomain($domain)
+    {
+        $this->domain = $domain;
 
         return $this;
     }

@@ -217,4 +217,74 @@ class Unloq extends Base {
     {
         return $this->execute('DELETE', 'api-keys/' . $id);
     }
+
+    /************************ EMAILS *************************/
+
+    /**
+     * @param UnloqContracts\Emails\Email $payload
+     *
+     * @return object
+     */
+    public function setEmailSettings(UnloqContracts\Emails\Email $payload)
+    {
+        return $this->execute('POST', 'custom/emails', $payload);
+    }
+
+    /**
+     * @return object
+     */
+    public function getEmailSettings()
+    {
+        return $this->execute('GET', 'custom/emails');
+    }
+
+    /**
+     * @return object
+     */
+    public function verifyEmailSettings()
+    {
+        return $this->execute('POST', 'custom/emails/verify');
+    }
+
+    /**
+     * @return object
+     */
+    public function deleteEmailSettings()
+    {
+        return $this->execute('DELETE', 'custom/emails');
+    }
+
+    /************************ EMAIL TEMPLATES *************************/
+
+    /**
+     * @param UnloqContracts\Emails\Template $payload
+     *
+     * @return object
+     */
+    public function updateEmailTemplate(UnloqContracts\Emails\Template $payload)
+    {
+        return $this->execute('PUT', 'custom/emails/templates/' . $payload->getCode(), $payload);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return object
+     */
+    public function getEmailTemplates($id = null)
+    {
+        $action = isset($id) ? 'custom/emails/templates/' . $id : 'custom/emails/templates';
+
+        return $this->execute('GET', $action);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return object
+     */
+    public function deleteEmailTemplate($id)
+    {
+        return $this->execute('DELETE', 'custom/emails/templates/' . $id);
+    }
 }

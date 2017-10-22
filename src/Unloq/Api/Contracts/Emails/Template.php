@@ -8,11 +8,32 @@ use Unloq\Api\Common\UnloqModel;
  *
  * @package Unloq\Api\Contracts
  *
+ * @property string code                                - Required
  * @property string subject                             - Required
  * @property string content                             - Required
  */
-class UpdateTemplate extends UnloqModel
+class Template extends UnloqModel
 {
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return $this
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
     /**
      * @return string
      */
