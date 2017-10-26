@@ -143,15 +143,31 @@ class Unloq extends Base {
     }
 
     /**
-     * @param null $id
+     * @param null $page
+     * @param null $limit
      *
      * @return object
      */
-    public function getActions($id = null)
+    public function getActions($page = null, $limit = null)
     {
-        $action = isset($id) ? 'actions/' . $id : 'actions';
+        $action = 'actions';
+        if($page !== null)
+            $action = $action . '?page=' . $page;
+
+        if($limit !== null)
+            $action = $limit . '?limit=' . $limit;
 
         return $this->execute('GET', $action);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return object
+     */
+    public function getAction($id)
+    {
+        return $this->execute('GET', 'actions/' . $id);
     }
 
     /**
@@ -177,19 +193,25 @@ class Unloq extends Base {
     }
 
     /**
-     * @param null $id
+     * @param null $page
+     * @param null $limit
      *
      * @return object
      */
-    public function getApiKeys($id = null)
+    public function getApiKeys($page = null, $limit = null)
     {
-        $action = isset($id) ? 'api-keys/' . $id : 'api-keys';
+        $action = 'api-keys';
+        if($page !== null)
+            $action = $action . '?page=' . $page;
+
+        if($limit !== null)
+            $action = $limit . '?limit=' . $limit;
 
         return $this->execute('GET', $action);
     }
 
     /**
-     * @param null $id
+     * @param string $id
      *
      * @return object
      */
@@ -199,7 +221,7 @@ class Unloq extends Base {
     }
 
     /**
-     * @param null $id
+     * @param string $id
      *
      * @return object
      */
@@ -352,7 +374,7 @@ class Unloq extends Base {
     }
 
     /**
-     * @param $id
+     * @param string $id
      *
      * @return object
      */
@@ -362,7 +384,7 @@ class Unloq extends Base {
     }
 
     /**
-     * @param $id
+     * @param string $id
      *
      * @return object
      */
@@ -402,5 +424,431 @@ class Unloq extends Base {
     public function getFirewallRuleLogs($ruleId, $payload)
     {
         return $this->execute('GET', 'firewalls/' . $ruleId, $payload);
+    }
+
+    /**************************** GROUPS *****************************/
+
+    /**
+     * @param null $page
+     * @param null $limit
+     *
+     * @return object
+     */
+    public function getGroups($page = null, $limit = null)
+    {
+        $action = 'groups';
+        if($page !== null)
+            $action = $action . '?page=' . $page;
+
+        if($limit !== null)
+            $action = $limit . '?limit=' . $limit;
+
+        return $this->execute('GET', $action);
+    }
+
+    /**
+     * @param $payload UnloqContracts\Groups\Group
+     *
+     * @return object
+     */
+    public function createGroup($payload)
+    {
+        return $this->execute('POST', 'groups', $payload);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return object
+     */
+    public function getGroup($id)
+    {
+        return $this->execute('GET', 'groups/' . $id);
+    }
+
+    /**
+     * @param $id
+     * @param $payload UnloqContracts\Groups\Group
+     *
+     * @return object
+     */
+    public function updateGroup($id, $payload)
+    {
+        return $this->execute('PUT', 'groups/' . $id, $payload);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return object
+     */
+    public function deleteGroup($id)
+    {
+        return $this->execute('DELETE', 'groups/' . $id);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return object
+     */
+    public function getGroupUsers($id)
+    {
+        return $this->execute('POST', 'groups/' . $id . '/users');
+    }
+
+    /**
+     * @param $groupId
+     * @param $payload UnloqContracts\Groups\Users;
+     *
+     * @return object
+     */
+    public function addGroupUser($groupId, $payload)
+    {
+        return $this->execute('POST', 'groups/' . $groupId, $payload);
+    }
+
+    /**
+     * @param $groupId
+     * @param $userId
+     *
+     * @return object
+     */
+    public function removeGroupUser($groupId, $userId)
+    {
+        return $this->execute('DELETE', 'groups/' . $groupId . '/users/' . $userId);
+    }
+
+    /**************************** NOTIFICATIONS *****************************/
+
+    /**
+     * @param null $page
+     * @param null $limit
+     *
+     * @return object
+     */
+    public function getNotifications($page = null, $limit = null)
+    {
+        $action = 'notifications';
+        if($page !== null)
+            $action = $action . '?page=' . $page;
+
+        if($limit !== null)
+            $action = $limit . '?limit=' . $limit;
+
+        return $this->execute('GET', $action);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return object
+     */
+    public function getNotificationDetails($id)
+    {
+        return $this->execute('GET', 'notifications/' . $id);
+    }
+
+    /**
+     * @param $payload UnloqContracts\Notifications\Notification
+     *
+     * @return object
+     */
+    public function createNotification($payload)
+    {
+        return $this->execute('POST', 'notifications', $payload);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return object
+     */
+    public function cancelNotification($id)
+    {
+        return $this->execute('POST', 'notifications/' . $id . '/cancel');
+    }
+
+    /**
+     * @param $id
+     *
+     * @return object
+     */
+    public function deleteNotification($id)
+    {
+        return $this->execute('DELETE', 'notifications/' . $id);
+    }
+
+    /**************************** REPORTS *****************************/
+
+    /**
+     * @param object UnloqContracts\Reports\Authentication
+     *
+     * @return object
+     */
+    public function getAuthenticationReports($payload)
+    {
+        return $this->execute('GET', 'reports/authentication/', $payload);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return object
+     */
+    public function getAuthenticationReport($id)
+    {
+        return $this->execute('GET', 'reports/authentication/' . $id);
+    }
+
+    /**
+     * @param object UnloqContracts\Reports\Authorization
+     *
+     * @return object
+     */
+    public function getAuthorizationReports($payload)
+    {
+        return $this->execute('GET', 'reports/authorization', $payload);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return object
+     */
+    public function getAuthorizationReport($id)
+    {
+        return $this->execute('GET', 'reports/authorization/' . $id);
+    }
+
+    /**
+     * @param object UnloqContracts\Reports\Encryption
+     *
+     * @return object
+     */
+    public function getEncryptionReports($payload)
+    {
+        return $this->execute('GET', 'reports/encryption', $payload);
+    }
+
+    /**************************** USERS *****************************/
+
+    /**
+     * @param null $page
+     * @param null $limit
+     *
+     * @return object
+     */
+    public function getUsers($page = null, $limit = null)
+    {
+        $action = 'users';
+        if($page !== null)
+            $action = $action . '?page=' . $page;
+
+        if($limit !== null)
+            $action = $limit . '?limit=' . $limit;
+
+        return $this->execute('GET', $action);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return object
+     */
+    public function getUser($id)
+    {
+        return $this->execute('GET', 'users/' . $id);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return object
+     */
+    public function getUserGroups($id)
+    {
+        return $this->execute('GET', 'users/' . $id . '/groups');
+    }
+
+    /**
+     * @param null $page
+     * @param null $limit
+     * @param string $id
+     *
+     * @return object
+     */
+    public function getUserActivity($page = null, $limit = null, $id)
+    {
+        $action = 'users/' . $id . '/activity';
+
+        if($page !== null)
+            $action = $action . '?page=' . $page;
+
+        if($limit !== null)
+            $action = $limit . '?limit=' . $limit;
+
+        return $this->execute('GET', $action);
+    }
+
+    /**************************** WEBHOOKS *****************************/
+
+    /**
+     * @param null $page
+     * @param null $limit
+     *
+     * @return object
+     */
+    public function getWebhooks($page = null, $limit = null)
+    {
+        $action = 'webhooks';
+        if($page !== null)
+            $action = $action . '?page=' . $page;
+
+        if($limit !== null)
+            $action = $limit . '?limit=' . $limit;
+
+        return $this->execute('GET', $action);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return object
+     */
+    public function getWebhookDetails($id)
+    {
+        return $this->execute('GET', 'webhooks/' . $id);
+    }
+
+    /**
+     * @param null $page
+     * @param null $limit
+     * @param string $id
+     *
+     * @return object
+     */
+    public function getWebhookHistory($page = null, $limit = null, $id)
+    {
+        $action = 'webhooks/' . $id . '/history';
+        if($page !== null)
+            $action = $action . '?page=' . $page;
+
+        if($limit !== null)
+            $action = $limit . '?limit=' . $limit;
+
+        return $this->execute('GET', $action);
+    }
+
+    /**
+     * @param $payload UnloqContracts\Webhooks\Webhook
+     *
+     * @return object
+     */
+    public function createWebhook($payload)
+    {
+        return $this->execute('POST', 'webhooks', $payload);
+    }
+
+    /**
+     * @param string $id
+     * @param $payload UnloqContracts\Webhooks\Webhook
+     *
+     * @return object
+     */
+    public function updateWebhook($id, $payload)
+    {
+        return $this->execute('PUT', 'webhooks/'.$id, $payload);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return object
+     */
+    public function deleteWebhook($id)
+    {
+        return $this->execute('DELETE', 'webhooks/.' . $id);
+    }
+
+    /**************************** WIDGETS *****************************/
+
+    /**
+     * @param null $page
+     * @param null $limit
+     *
+     * @return object
+     */
+    public function getWidgets($page = null, $limit = null)
+    {
+        $action = 'widgets';
+        if($page !== null)
+            $action = $action . '?page=' . $page;
+
+        if($limit !== null)
+            $action = $limit . '?limit=' . $limit;
+
+        return $this->execute('GET', $action);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return object
+     */
+    public function getWidgetDetails($id)
+    {
+        return $this->execute('GET', 'widgets/' . $id);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return object
+     */
+    public function getWidgetScript($id)
+    {
+        return $this->execute('GET', 'widgets/' . $id . '/script');
+    }
+
+    /**
+     * @param $payload UnloqContracts\Widgets\Widget
+     *
+     * @return object
+     */
+    public function createWidget($payload)
+    {
+        return $this->execute('POST', 'widgets', $payload);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return object
+     */
+    public function verifyWidget($id)
+    {
+        return $this->execute('POST', 'widgets/' . $id . '/verify');
+    }
+
+    /**
+     * @param string $id
+     * @param $payload UnloqContracts\Widgets\Widget
+     *
+     * @return object
+     */
+    public function updateWidget($id, $payload)
+    {
+        return $this->execute('PUT', 'widgets/'.$id, $payload);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return object
+     */
+    public function deleteWidget($id)
+    {
+        return $this->execute('DELETE', 'widgets/.' . $id);
     }
 }
