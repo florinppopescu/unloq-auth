@@ -28,7 +28,7 @@ class Authenticate extends UnloqModel {
      */
     public function setEmail($email)
     {
-        $this->id = $email;
+        $this->email = $email;
 
         return $this;
     }
